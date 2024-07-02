@@ -61,7 +61,18 @@ def shoo_dog(r):
             print(f"Attempt {attempt}: Obtaining comments")
             try:
                 for comment in r.subreddit('BojackHorseman').comments(limit=100):
-                    if 'Mr. Peanutbutter' in comment.body and not comment.saved and comment.author.name != config.username:
+                    if "who's that dog" in comment.body and not comment.saved and comment.author.name != config.username:
+                        print("Who's that dog?")
+                        comment.reply(f'''Mr. Peanutbutter's house\n
+Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog bone)\n
+Who's that dog? Mr. Peanutbutter! (Trying to catch a break, Jack, leave a dog alone)\n
+He's a dirty dog, he's just trying to do his job\n
+Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
+        [listen?](https://www.youtube.com/watch?v=uZQ7pDFZ_-8)''')
+                        print(f"Replied to comment {comment.id} by {comment.author.name} with Mr. Peanutbutter's theme")
+                        comment.save()
+                        time.sleep(60)
+                    elif 'Mr. Peanutbutter' in comment.body and not comment.saved and comment.author.name != config.username:
                         print('Found one!')
                         image_url = random.choice(images)
                         phrase = random.choice(phrases).format(image=image_url)
