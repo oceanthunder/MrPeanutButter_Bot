@@ -1,4 +1,4 @@
-username = 'MrPeanutButter_Bot'
-password = 'dianenguyen'
-client_id = 'e9xJfbNwhqMsUe_aBV8zpA'
-client_secret = 'dCWMOT0-holDk1Lj91rVKbVHfxkvgw'
+username = #add reddit username here
+password = #add reddit profile pwd here
+client_id = #add reddit's client id
+client_secret = #add reddit's secret client string
