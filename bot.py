@@ -44,6 +44,25 @@ phrases = [
     "Did I hear my name? Woof! [Here I am]({image})"
 ]
 
+erica_phrases = [
+    "Oh Erica... she’s had quite the journey. Remember when she lost a foot but gained a new tooth?",
+    "Erica's been through a lot. She once had a split-brain procedure, but she's still got one good eye to see the world!",
+    "Erica had to spend time in the burn ward, but she came out stronger and with a new tooth!",
+    "Erica might have only one foot, but she's got a big heart and a new tooth to smile with!",
+    "Erica's been through many changes, including a split-brain procedure. At least she still has the right number of ears now!",
+    "Erica can’t be around kids for legal reasons, but she’s got one good eye to keep an eye on us all!",
+    "She can’t vote in national elections, but Erica’s still a star with her one good eye and her remarkable resilience.",
+    "Erica's life hasn’t been easy, with all the changes she’s gone through. From losing a foot to gaining a new tooth, she’s truly amazing!",
+    "Erica might have had a split-brain procedure and can't be around children, but she’s got a strong spirit and a good eye for the important things.",
+    "Erica might have only one foot, but she’s got plenty of courage and a new tooth to show off!",
+    "Erica’s story is unique—losing a foot and gaining a friend along the way. She’s got one good eye on the prize!",
+    "Mentioned Erica? She’s come a long way from her time in the burn ward, and she’s still got a great sense of humor!",
+    "Heard Erica’s name? She might have had a split-brain procedure, but she’s still as vibrant and resilient as ever!",
+    "Erica! What are you doing here with a child-sized coffin?",
+    "Erica, you can't be here! this place is filled with childeren..",
+    "Did I ever tell ya about my buddy Erica, Third Degree Burns over 95% percent of her body."
+]
+
 def login():
     print("Logging in...")
     r = praw.Reddit(username=config.username,
@@ -62,7 +81,15 @@ def shoo_dog(r):
             print(f"Attempt {attempt}: Obtaining comments")
             try:
                 for comment in r.subreddit('BoJackHorseman').comments(limit=100):
-                    if "who's that dog" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
+                    if "erica" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
+                        print('Erica mentioned!')
+                        erica = random.choice(erica_phrases)
+                        comment.reply(erica)
+                        comment.save()
+                        print(f'Replied to comment {comment.id} by {comment.author.name} with phrase: {erica}')
+                        time.sleep(60)
+                    
+                    elif "who's that dog" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
                         print("Who's that dog?")
                         comment.reply(f'''Mr. Peanutbutter's house\n
                         Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
