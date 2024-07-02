@@ -2,6 +2,7 @@ import praw
 import config
 import random
 import time
+import prawcore.exceptions
 
 # List of image URLs (excluding .mp4)
 images = [
@@ -60,19 +61,19 @@ def shoo_dog(r):
         while attempt <= max_attempts:
             print(f"Attempt {attempt}: Obtaining comments")
             try:
-                for comment in r.subreddit('BojackHorseman').comments(limit=100):
-                    if "who's that dog" in comment.body and not comment.saved and comment.author.name != config.username:
+                for comment in r.subreddit('BoJackHorseman').comments(limit=100):
+                    if "who's that dog" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
                         print("Who's that dog?")
                         comment.reply(f'''Mr. Peanutbutter's house\n
-Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog bone)\n
-Who's that dog? Mr. Peanutbutter! (Trying to catch a break, Jack, leave a dog alone)\n
-He's a dirty dog, he's just trying to do his job\n
-Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
-        [listen?](https://www.youtube.com/watch?v=uZQ7pDFZ_-8)''')
+                        Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
+                        Who's that dog? Mr. Peanutbutter! (Trying to catch a break, Jack, leave a dog alone)\n
+                        He's a dirty dog, he's just trying to do his job\n
+                        Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
+                        [listen?](https://www.youtube.com/watch?v=uZQ7pDFZ_-8)''')
                         print(f"Replied to comment {comment.id} by {comment.author.name} with Mr. Peanutbutter's theme")
                         comment.save()
                         time.sleep(60)
-                    elif 'Mr. Peanutbutter' in comment.body and not comment.saved and comment.author.name != config.username:
+                    elif 'mr. peanutbutter' in comment.body.lower() and not comment.saved and comment.author.name != config.username:
                         print('Found one!')
                         image_url = random.choice(images)
                         phrase = random.choice(phrases).format(image=image_url)
@@ -98,10 +99,15 @@ Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
                 time.sleep(60)
                 break
 
-            except praw.exceptions.RequestException as e:
+            except prawcore.exceptions.RequestException as e:
                 print(f"Request error occurred: {e}")
                 time.sleep(60)
                 break
+
+            except prawcore.exceptions.OAuthException as e:
+                print(f"OAuth error occurred: {e}")
+                print("Check your OAuth credentials and try again.")
+                return  # Exit the script if OAuth credentials are incorrect
 
             except Exception as e:
                 print(f'An unexpected error occurred: {e}')
