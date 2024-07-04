@@ -3,6 +3,7 @@ import config
 import random
 import time
 import prawcore.exceptions
+import re
 
 # List of image URLs (excluding .mp4)
 images = [
@@ -81,7 +82,7 @@ def shoo_dog(r):
             print(f"Attempt {attempt}: Obtaining comments")
             try:
                 for comment in r.subreddit('BoJackHorseman').comments(limit=100):
-                    if "erica" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
+                    if re.search(r'\berica\b', comment.body.lower()) and not comment.saved and comment.author.name != config.username:
                         print('Erica mentioned!')
                         erica = random.choice(erica_phrases)
                         comment.reply(erica)
