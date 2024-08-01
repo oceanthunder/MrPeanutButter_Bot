@@ -26,7 +26,7 @@ images = [
     "https://i.imgur.com/5Z8S8Uz.jpeg"
 ]
 
-# List of phrases
+# List of phrases to reply with, each containing a placeholder for an image URL
 phrases = [
     "Did someone say my name! [That's me]({image})",
     "Woof! Who's talking about me? [Here I am]({image})",
@@ -45,6 +45,7 @@ phrases = [
     "Did I hear my name? Woof! [Here I am]({image})"
 ]
 
+# List of Erica-related phrases for specific comment triggers
 erica_phrases = [
     "Oh Erica... she’s had quite the journey. Remember when she lost a foot but gained a new tooth?",
     "Erica's been through a lot. She once had a split-brain procedure, but she's still got one good eye to see the world!",
@@ -60,11 +61,17 @@ erica_phrases = [
     "Mentioned Erica? She’s come a long way from her time in the burn ward, and she’s still got a great sense of humor!",
     "Heard Erica’s name? She might have had a split-brain procedure, but she’s still as vibrant and resilient as ever!",
     "Erica! What are you doing here with a child-sized coffin?",
-    "Erica, you can't be here! this place is filled with childeren..",
+    "Erica, you can't be here! this place is filled with children..",
     "Did I ever tell ya about my buddy Erica, Third Degree Burns over 95% percent of her body."
 ]
 
 def login():
+    """
+    Logs into Reddit using credentials stored in the config module.
+    
+    Returns:
+        praw.Reddit: An authenticated Reddit instance.
+    """
     print("Logging in...")
     r = praw.Reddit(username=config.username,
                     password=config.password,
@@ -75,6 +82,13 @@ def login():
     return r
 
 def shoo_dog(r):
+    """
+    Continuously monitors the BoJackHorseman subreddit for specific comment triggers 
+    and replies with appropriate phrases or images.
+
+    Args:
+        r (praw.Reddit): An authenticated Reddit instance.
+    """
     while True:
         attempt = 1
         max_attempts = 5
@@ -92,11 +106,11 @@ def shoo_dog(r):
                     
                     elif "who's that dog" in comment.body.lower() and not comment.saved and comment.author.name != config.username:
                         print("Who's that dog?")
-                        comment.reply(f'''Mr. Peanutbutter's house\n
-                        Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
-                        Who's that dog? Mr. Peanutbutter! (Trying to catch a break, Jack, leave a dog alone)\n
-                        He's a dirty dog, he's just trying to do his job\n
-                        Who's that dog? Mr. Peanutbutter! (Knick knack, paddywhack, give a dog a bone)\n
+                        comment.reply(f'''Mr. Peanutbutter's bot!\n
+                        Who's that bot? Mr. Peanutbutter! (Knick knack, paddywhack, give a bot a bone)\n
+                        Who's that bot? Mr. Peanutbutter! (Trying to catch a break, Jack, leave a bot alone)\n
+                        He's a dirty bot, he's just trying to do his job\n
+                        Who's that bot? Mr. Peanutbutter! (Knick knack, paddywhack, give a bot a bone)\n
                         [listen?](https://www.youtube.com/watch?v=uZQ7pDFZ_-8)''')
                         print(f"Replied to comment {comment.id} by {comment.author.name} with Mr. Peanutbutter's theme")
                         comment.save()
