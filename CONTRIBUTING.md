@@ -4,14 +4,13 @@ Thank you for considering contributing to MrPeanutButter-Bot!
 
 ## How can you contribute?
 
-We welcome both code and non-code contributions. You can:
+I welcome both code and non-code contributions. You can:
 
 - Report a bug
 - Improve documentation
 - Submit a bug fix
 - Propose a new feature or improvement
 - Contribute a new feature or improvement
-- Test MrPeanutButter-Bot
 
 ## Code contributions
 
