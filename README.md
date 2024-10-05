@@ -1,13 +1,12 @@
 # MrPeanutButter-Bot
 
-MrPeanutButter-Bot is a Reddit bot designed to interact with the r/BoJackHorseman subreddit by monitoring comments for mentions of the character "Mr. Peanutbutter" and "Erica" and responding with predefined messages and images related to the character. The bot includes functionality to manage Reddit API rate limits to ensure it operates efficiently without violating Reddit’s guidelines.
+MrPeanutButter-Bot is a Reddit bot designed to interact with the r/BoJackHorseman subreddit by monitoring comments for mentions of the character "Mr. Peanutbutter" and "Erica" and responding with predefined messages and images (from imgur) related to the character. The bot includes functionality to manage Reddit API rate limits to ensure it operates efficiently without violating Reddit’s guidelines.
 
 ## Features
 
 - Monitors comments in the r/BoJackHorseman subreddit.
 - Responds automatically to any mention of "Mr. Peanutbutter" or "Erica."
-- Handles Reddit API rate limits to avoid overuse of resources.
-- Customizable subreddit interactions.
+- Handles Reddit API rate limits to avoid getting banned.
 
 ## Prerequisites
 
@@ -51,6 +50,7 @@ If you wish to change the subreddit the bot interacts with, modify the following
 for comment in r.subreddit('BoJackHorseman').comments(limit=100):
 ```
 You can replace `'BoJackHorseman'` with the name of any subreddit you prefer.
+(You'll have to change the responses and the mentioned characters accordingly.)
 
 ### 5. Run the Bot
 Once everything is set up, simply run the bot using:
@@ -62,10 +62,10 @@ The bot will start monitoring the specified subreddit and respond to comments me
 
 ## Handling Reddit Rate Limits
 
-The bot is designed to handle Reddit API rate limits efficiently to avoid being temporarily banned or restricted by Reddit for excessive requests. The bot monitors the rate limits and adapts its behavior accordingly, ensuring smooth and safe operation.
+The bot is designed to handle Reddit API rate limits efficiently to avoid being temporarily banned or restricted by Reddit for excessive requests.
 
 ## Contribution Guidelines
 
-We welcome contributions to improve MrPeanutButter-Bot. Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get involved.
+I welcome contributions to improve MrPeanutButter-Bot. Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get involved.
 
 ---
